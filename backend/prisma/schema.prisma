@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id           Int       @id @default(autoincrement())
+  nome         String
+  email        String    @unique
+  senha        String
+  papel        Papel     @default(FUNCIONARIO)
+  criadoEm     DateTime  @default(now())
+  atualizadoEm DateTime  @updatedAt
+  excluidoEm   DateTime?
+  pedidos      Pedido[]
+  movimentacoes MovimentacaoEstoque[]
+}
+
+/// Nível de acesso do usuário no sistema.
+enum Papel {
+  /// Acesso total: gerencia usuários, financeiro, clientes, produtos e pedidos.
+  ADMIN
+  /// Acesso operacional: gerencia apenas clientes, produtos e pedidos.
+  FUNCIONARIO
+}
+
+model Cliente {
+  id           Int       @id @default(autoincrement())
+  nome         String
+  email        String    @unique
+  telefone     String
+  endereco     String
+  criadoEm     DateTime  @default(now())
+  atualizadoEm DateTime  @updatedAt
+  excluidoEm   DateTime?
+  pedidos      Pedido[]
+}
+
+model Produto {
+  id               Int                   @id @default(autoincrement())
+  nome             String                @unique
+  tamanho          TamanhoBarril         @default(BARRIL_30L)
+  quantidade       Int
+  quantidadeMinima Int
+  precoUnitario    Decimal               @db.Decimal(10, 2)
+  criadoEm         DateTime              @default(now())
+  atualizadoEm     DateTime              @updatedAt
+  excluidoEm       DateTime?
+  itensPedido      ItemPedido[]
+  movimentacoes    MovimentacaoEstoque[]
+}
+
+/// Histórico de entradas e saídas de estoque de cada produto.
+/// O campo Produto.quantidade guarda o saldo atual (para consulta rápida);
+/// esta tabela mantém o rastro de como esse saldo foi formado, registrando
+/// quem fez a movimentação (usuarioId) e, quando aplicável, o pedido relacionado.
+/// A quantidade é gravada COM SINAL (positiva para entrada, negativa para saída),
+/// de modo que a soma das movimentações de um produto reproduz o saldo atual.
+model MovimentacaoEstoque {
+  id         Int              @id @default(autoincrement())
+  produtoId  Int
+  produto    Produto          @relation(fields: [produtoId], references: [id])
+  usuarioId  Int?
+  usuario    Usuario?         @relation(fields: [usuarioId], references: [id])
+  pedidoId   Int?
+  pedido     Pedido?          @relation(fields: [pedidoId], references: [id])
+  tipo       TipoMovimentacao
+  quantidade Int
+  observacao String?
+  criadoEm   DateTime         @default(now())
+}
+
+/// Tipo de movimentação registrada no histórico de estoque.
+/// A soma de `quantidade` de todas as movimentações de um produto reproduz o saldo atual.
+enum TipoMovimentacao {
+  /// Entrada de estoque (compra/reposição). Quantidade sempre positiva.
+  ENTRADA
+  /// Saída de estoque (venda/pedido concluído). Quantidade sempre negativa.
+  SAIDA
+  /// Ajuste manual de inventário (correção de saldo). Quantidade positiva (aumento) ou negativa (redução).
+  AJUSTE
+}
+
+/// Tamanho do barril de chopp disponível no estoque.
+enum TamanhoBarril {
+  /// Barril de 30 litros.
+  BARRIL_30L
+  /// Barril de 50 litros.
+  BARRIL_50L
+}
+
+model Pedido {
+  id           Int          @id @default(autoincrement())
+  clienteId    Int
+  cliente      Cliente      @relation(fields: [clienteId], references: [id])
+  usuarioId    Int
+  usuario      Usuario      @relation(fields: [usuarioId], references: [id])
+  status       StatusPedido @default(PENDENTE)
+  valorTotal   Decimal      @default(0) @db.Decimal(10, 2)
+  criadoEm     DateTime     @default(now())
+  atualizadoEm DateTime     @updatedAt
+  excluidoEm   DateTime?
+  itens        ItemPedido[]
+  movimentacoes MovimentacaoEstoque[]
+}
+
+model ItemPedido {
+  id            Int     @id @default(autoincrement())
+  pedidoId      Int
+  pedido        Pedido  @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  produtoId     Int
+  produto       Produto @relation(fields: [produtoId], references: [id])
+  quantidade    Int
+  precoUnitario Decimal @db.Decimal(10, 2)
+  precoTotal    Decimal @db.Decimal(10, 2)
+}
+
+/// Estados possíveis de um pedido ao longo do seu ciclo de vida.
+enum StatusPedido {
+  /// Pedido registrado, aguardando início do preparo.
+  PENDENTE
+  /// Pedido em preparo/separação.
+  EM_ANDAMENTO
+  /// Pedido finalizado e entregue; baixa o estoque.
+  CONCLUIDO
+  /// Pedido cancelado; devolve o estoque se já havia sido concluído.
+  CANCELADO
+}
+
+

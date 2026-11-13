@@ -1,0 +1,90 @@
+.bloco {
+  background: linear-gradient(
+    90deg,
+    #2a2320 25%,
+    #3a302b 37%,
+    #2a2320 63%
+  );
+  background-size: 400% 100%;
+  animation: brilho 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+@keyframes brilho {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Skeleton de tabela (vira lista de cards no mobile via as próprias páginas) */
+.tabelaSkeleton {
+  width: 100%;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.linha:last-child {
+  border-bottom: none;
+}
+
+.celula {
+  height: 14px;
+  flex: 1;
+}
+
+/* Skeleton de cards de estatística */
+.gradeCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.cardEstat {
+  background-color: #1B1412;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconeCard {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.textoCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linhaCurta {
+  height: 10px;
+  width: 60%;
+}
+
+.linhaLonga {
+  height: 18px;
+  width: 85%;
+}
+
+@media (max-width: 768px) {
+  .linha {
+    gap: 12px;
+    padding: 14px 16px;
+  }
+}

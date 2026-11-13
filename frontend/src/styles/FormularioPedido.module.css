@@ -1,0 +1,127 @@
+.cardPedido {
+  background-color: #1B1412;
+  border-radius: 10px;
+  padding: 24px;
+  border: 1px solid #2a2a2a;
+}
+
+.tituloSecao {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.grade2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.cabecalhoItens {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.botaoAdicionar {
+  background-color: transparent;
+  border: 1px solid #AA5A21;
+  color: #AA5A21;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.linhaItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  padding: 16px;
+  background-color: #33363F;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #2a2a2a;
+}
+
+.botaoRemover {
+  background-color: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.botaoRemover:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.erroEstoque {
+  color: #ef4444;
+  font-size: 11px;
+}
+
+.linhaTotal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #33363F;
+}
+
+.rotuloTotal {
+  color: #D9D9D9;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.valorTotal {
+  color: #AA5A21;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.mensagemAviso {
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #f59e0b;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .cardPedido {
+    padding: 16px;
+  }
+
+  .grade2 {
+    grid-template-columns: 1fr;
+  }
+
+  .linhaItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .linhaItem .botaoRemover {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .linhaTotal {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}

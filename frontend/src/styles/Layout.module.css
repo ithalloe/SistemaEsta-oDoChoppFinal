@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #33363F;
+}
+
+.conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.principal {
+  flex: 1;
+  padding: 32px;
+}
+
+/* Barra superior visível apenas no mobile */
+.topbar {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background-color: #1B1412;
+  padding: 12px 16px;
+  border-bottom: 1px solid #33363F;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.botaoMenu {
+  background: transparent;
+  border: 1px solid #4a4d56;
+  color: #FFFFFF;
+  border-radius: 6px;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.logoTopbar {
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Overlay escuro atrás da sidebar no mobile */
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    display: flex;
+  }
+
+  .principal {
+    padding: 16px;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 50;
+  }
+}

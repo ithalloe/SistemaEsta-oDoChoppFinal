@@ -1,0 +1,240 @@
+.abas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.aba {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #4a4d56;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #D9D9D9;
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.abaAtiva {
+  background-color: #AA5A21;
+  color: #FFFFFF;
+  border-color: #AA5A21;
+}
+
+.cardFiltro {
+  background-color: #1B1412;
+  border-radius: 10px;
+  padding: 20px 24px;
+  border: 1px solid #2a2a2a;
+  margin-bottom: 24px;
+}
+
+.gradeFiltro {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.acoesFiltr {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.botaoLimpar {
+  background-color: transparent;
+  border: 1px solid #4a4d56;
+  color: #D9D9D9;
+  border-radius: 6px;
+  padding: 11px 18px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.botaoGerar {
+  background-color: #AA5A21;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.botaoGerar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fileirCards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.fileirCards2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cardEstat {
+  background-color: #1B1412;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconeEstat {
+  font-size: 32px;
+}
+
+.rotuloEstat {
+  color: #D9D9D9;
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.valorEstat {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0 0 0;
+}
+
+.tituloTabela {
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 16px 0 16px;
+  margin-bottom: 12px;
+}
+
+.valorVerde {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.valorLaranja {
+  color: #AA5A21;
+  font-weight: 700;
+}
+
+.barraPercentual {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.preenchimentoPercentual {
+  height: 6px;
+  background-color: #AA5A21;
+  border-radius: 3px;
+  min-width: 2px;
+  max-width: 80px;
+}
+
+.rotuloPercentual {
+  color: #D9D9D9;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Barra de exportação */
+.barraExportar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.botaoExportar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #4a4d56;
+  background-color: transparent;
+  color: #D9D9D9;
+  transition: all 0.2s;
+}
+
+.botaoExportar:hover:not(:disabled) {
+  border-color: #AA5A21;
+  color: #AA5A21;
+}
+
+.botaoExportar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.botaoExportarPdf {
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+}
+
+.botaoExportarExcel {
+  border-color: rgba(34, 197, 94, 0.5);
+  color: #22c55e;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .fileirCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gradeFiltro {
+    grid-template-columns: 1fr;
+  }
+
+  .barraExportar {
+    flex-direction: column;
+  }
+
+  .botaoExportar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .acoesFiltr {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .botaoLimpar,
+  .botaoGerar {
+    width: 100%;
+  }
+
+  .fileirCards,
+  .fileirCards2 {
+    grid-template-columns: 1fr;
+  }
+
+  .cardFiltro {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,200 @@
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background-color: #1B1412;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.2s ease, min-width 0.2s ease;
+}
+
+/* Botão que recolhe/expande a barra (só no computador) */
+.botaoRecolher {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: transparent;
+  border: 1px solid #33363F;
+  border-radius: 6px;
+  color: #D9D9D9;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.botaoRecolher:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.rotulo {
+  white-space: nowrap;
+}
+
+/* Barra recolhida: só os ícones. Vale apenas no computador; no celular o menu abre por cima da tela. */
+@media (min-width: 769px) {
+  .sidebarRecolhida {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .sidebarRecolhida .rotulo,
+  .sidebarRecolhida .infoUsuario {
+    display: none;
+  }
+
+  .sidebarRecolhida .areaLogo {
+    padding: 12px 8px;
+  }
+
+  .sidebarRecolhida .logo {
+    width: 44px;
+  }
+
+  .sidebarRecolhida .itemNav {
+    justify-content: center;
+    padding: 12px 0;
+    gap: 0;
+  }
+
+  .sidebarRecolhida .iconeNav {
+    font-size: 18px;
+  }
+
+  .sidebarRecolhida .rodape {
+    padding: 16px 12px;
+  }
+
+  .sidebarRecolhida .botaoSair,
+  .sidebarRecolhida .botaoRecolher {
+    gap: 0;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .botaoRecolher {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebarAberta {
+    transform: translateX(0);
+  }
+}
+
+.areaLogo {
+  padding: 16px;
+  border-bottom: 1px solid #33363F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 180px;
+  object-fit: contain;
+}
+
+.nav {
+  flex: 1;
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemNav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border-left: 3px solid transparent;
+  color: #D9D9D9;
+}
+
+.itemNavAtivo {
+  background-color: #AA5A21;
+  color: #FFFFFF;
+}
+
+.iconeNav {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.rodape {
+  padding: 16px;
+  border-top: 1px solid #33363F;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoUsuario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.nomeUsuario {
+  color: #D9D9D9;
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.badgePapel {
+  border-radius: 10px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.botaoSair {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid #AA5A21;
+  border-radius: 6px;
+  color: #AA5A21;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.botaoSair:hover {
+  background-color: rgba(170, 90, 33, 0.1);
+}
