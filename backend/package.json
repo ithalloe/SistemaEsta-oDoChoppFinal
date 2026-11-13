@@ -9,6 +9,7 @@
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc && node -e \"require('fs').cpSync('src/assets','dist/assets',{recursive:true})\"",
     "start": "node dist/index.js",
+    "vercel-build": "prisma generate && prisma migrate deploy && node -e \"require('fs').mkdirSync('public',{recursive:true});require('fs').writeFileSync('public/.keep','')\"",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "ts-node prisma/seed.ts"

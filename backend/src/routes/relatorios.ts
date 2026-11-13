@@ -197,7 +197,8 @@ roteador.get('/:tipo/export', async (req: RequisicaoAutenticada, res: Response) 
     res.setHeader('Content-Type', excel ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' : 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="${documento.nomeArquivo}-${data}.${excel ? 'xlsx' : 'pdf'}"`);
     return res.end(buffer);
-  } catch {
+  } catch (erro) {
+    console.error('Erro ao exportar relatório:', erro);
     return res.status(500).json({ error: 'Erro ao exportar o relatório' });
   }
 });
